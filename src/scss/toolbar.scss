@@ -1,0 +1,15 @@
+.excel__toolbar {
+  position: absolute;
+  top: $header-height;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: $toolbar-height;
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
+  padding: 7px 10px;
+
+  .button {
+    @include button();
+  }
+}
