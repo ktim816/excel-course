@@ -1,5 +1,35 @@
+@import '/node_modules/normalize.css/normalize.css';
 @import './variables';
+@import './mixins';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
-  background: red;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  margin: 0;
 }
+
+button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.excel {
+  position: relative;
+  height: 100%;
+  color: #888;
+  max-width: 100%;
+  font-size: .8rem;
+}
+
+@import './header';
+@import './toolbar';
+@import './formula';
+@import './table';
+@import './dashboard';
