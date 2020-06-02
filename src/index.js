@@ -1,8 +1,21 @@
-import './module';
+import './prototypes';
 import './scss/index.scss';
 
-const fn = () => {
-  console.log('Done2');
-};
+import {
+  Excel,
+  Header,
+  Toolbar,
+  Formula,
+  Table,
+} from '@/components';
 
-fn();
+const excel = new Excel('#app', {
+  components: [
+    Header,
+    Toolbar,
+    Formula,
+    Table,
+  ],
+});
+
+excel.render();
