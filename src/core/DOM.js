@@ -9,6 +9,10 @@ class DOM {
       element;
   }
 
+  get data() {
+    return this.node.dataset;
+  }
+
   html(html) {
     if (typeof html === 'string') {
       this.node.innerHTML = html;
@@ -35,6 +39,39 @@ class DOM {
       this.node.appendChild(element);
     }
     return this;
+  }
+
+  findAll(selector) {
+    return this.node.querySelectorAll(selector);
+  }
+
+  closest(selector) {
+    return $(this.node.closest(selector));
+  }
+
+  getCoords() {
+    return this.node.getBoundingClientRect();
+  }
+
+  addClass(classes) {
+    this.node.classList.add(classes);
+  }
+
+  toggleClass(className) {
+    this.node.classList.toggle(className);
+  }
+
+  removeClass(classes) {
+    this.node.classList.remove(classes);
+  }
+
+  css(style = {}) {
+    if (typeof style === 'string') {
+      const styles = getComputedStyle(this.node);
+      return styles[style];
+    } else {
+      return Object.assign(this.node.style, style);
+    }
   }
 
   clear() {

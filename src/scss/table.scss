@@ -30,6 +30,7 @@
   }
 
   .row-info {
+    position: relative;
     min-width: $info-cell-width;
   }
 
@@ -38,23 +39,63 @@
   }
 
   .column {
+    position: relative;
     border-left: none;
   }
 
   .cell {
     padding: 5px;
     height: 100%;
+    overflow: hidden;
     border: 1px solid #e2e3e3;
     border-top: none;
     border-left: none;
     color: #111;
-    white-space: nowrap;
     outline: none;
 
     &.selected {
       border: none;
-      outline: 2px solid #3c74ff;
+      outline: 2px solid $color-primary;
       z-index: 2;
+    }
+  }
+
+  .row-resize,
+  .col-resize {
+    position: absolute;
+    z-index: 1000;
+    background-color: $color-primary;
+    opacity: 0;
+
+    &.active,
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .col-resize {
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    margin-right: -2px;
+    cursor: col-resize;
+
+    &.active {
+      height: 100vh;
+    }
+  }
+
+  .row-resize {
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    margin-bottom: -2px;
+    cursor: row-resize;
+
+    &.active {
+      width: 100vw;
     }
   }
 }

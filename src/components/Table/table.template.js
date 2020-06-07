@@ -29,22 +29,33 @@ function toChar(_, index) {
   return String.fromCharCode(CODES.a + index);
 }
 
-function createCol(data) {
+function createCol(data, index) {
   return `
-    <div class="column">${data}</div>
+    <div class="column" data-type="resizable" data-col=${index}>
+      ${data}
+      <div class="col-resize" data-resize="col"></div>
+    </div>
   `;
 }
 
-function createCell() {
+function createCell(_, col) {
   return `
-    <div class="cell" contenteditable=""></div>
+    <div
+      class="cell"
+      data-col=${col}
+      contenteditable=""
+    ></div>
   `;
 }
 
-function createRow(data, num = '') {
+function createRow(data = [], index) {
+  const resizer = index ? '<div class="row-resize" data-resize="row"></div>' : '';
   return `
-    <div class="row">
-      <div class="row-info">${num}</div>
+    <div class="row" data-type="resizable">
+      <div class="row-info">
+        ${index ? index : ''}
+        ${resizer}
+      </div>
       <div class="row-data">${data}</div>
     </div>
   `;
