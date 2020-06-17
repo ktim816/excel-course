@@ -13,12 +13,28 @@ class DOM {
     return this.node.dataset;
   }
 
+  focus() {
+    this.node.focus();
+  }
+
   html(html) {
     if (typeof html === 'string') {
       this.node.innerHTML = html;
       return this;
     }
     return this.node.innerHTML.trim();
+  }
+
+  text(text) {
+    let type = 'textContent';
+    if (this.node.tagName.toLowerCase() === 'input') {
+      type = 'value';
+    }
+    if (typeof text === 'string') {
+      this.node[type] = text;
+      return this;
+    }
+    return this.node[type].trim();
   }
 
   on(eventType, callback) {
@@ -39,6 +55,10 @@ class DOM {
       this.node.appendChild(element);
     }
     return this;
+  }
+
+  find(selector) {
+    return $(this.node.querySelector(selector));
   }
 
   findAll(selector) {

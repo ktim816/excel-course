@@ -1,27 +1,43 @@
 import {
+  $,
   ExcelComponent,
 } from '@/core';
 
 export class Formula extends ExcelComponent {
   static className = 'excel__formula';
 
-  constructor(root) {
+  constructor(root, options) {
     super(root, {
       name: 'Formula',
       listeners: [
         'input',
-        'click',
+        'keydown',
       ],
+      ...options,
     });
   }
 
-  onClick(e) {
-    console.log(this);
-    console.log('Formula: onClick', e);
+  init() {
+    super.init();
+    this.formula = this.root.find('[contenteditable]');
+    const getText = (target) => {
+      this.formula.text(target.text());
+    };
+    this.listen('table:select', getText);
+    this.listen('table:input', getText);
   }
 
   onInput(e) {
-    console.log('Formula: onInput', e);
+    this.emit('formula:input', $(e.target).text());
+  }
+
+  onKeydown(event) {
+    const {key} = event;
+    const keys = ['Enter', 'Tab'];
+    if (keys.includes(key)) {
+      event.preventDefault();
+      this.emit('formula:done');
+    }
   }
 
   toHTML() {
