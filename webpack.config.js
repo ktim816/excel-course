@@ -19,9 +19,6 @@ const jsLoaders = () => {
   if (isDev) {
     loaders.push({
       loader: 'eslint-loader',
-      options: {
-        fix: true,
-      },
     });
   }
 

@@ -11,6 +11,7 @@
     "require-jsdoc": "off",
     "no-extend-native": "off",
     "no-invalid-this": "off",
+    "no-array-constructor": "off",
     "linebreak-style": ["error", "windows"]
   }
 }

@@ -11,15 +11,15 @@ export function createTable(rowsCount = 15) {
       .map(toChar)
       .map(createCol)
       .join('');
-  const cells = Array(colsCount)
-      .fill('')
-      .map(createCell)
-      .join('');
 
   rows.push(createRow(cols));
 
-  for (let i = 0; i < rowsCount; i++) {
-    rows.push(createRow(cells, (i + 1)));
+  for (let row = 0; row < rowsCount; row++) {
+    const cells = Array(colsCount)
+        .fill('')
+        .map(createCell(row))
+        .join('');
+    rows.push(createRow(cells, (row + 1)));
   }
 
   return rows.join('');
@@ -38,11 +38,13 @@ function createCol(data, index) {
   `;
 }
 
-function createCell(_, col) {
-  return `
+function createCell(row) {
+  return (_, col) => `
     <div
       class="cell"
-      data-col=${col}
+      data-type="cell"
+      data-col="${col}"
+      data-id="${row}:${col}"
       contenteditable=""
     ></div>
   `;
